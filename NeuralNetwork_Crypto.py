@@ -11,8 +11,8 @@ from tensorflow.keras.models import Sequential
 crypto_currency = 'BTC'
 against_currency = 'USD'
 
-start = dt.datetime(2020, 1, 1)
-end = dt.datetime.now()
+start = dt.datetime(2021, 1, 1)
+end = dt.datetime(2022, 1, 1)
 
 data = web.DataReader(f'{crypto_currency}-{against_currency}', 'yahoo', start, end)
 
@@ -20,11 +20,11 @@ data = web.DataReader(f'{crypto_currency}-{against_currency}', 'yahoo', start, e
 # Prepare Data
 #print(data.head())
 
-scaler = MinMaxScaler(feature_range=(0,1))
-scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1,1))
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1, 1))
 
 
-prediction_days = 60
+prediction_days = 120
 future_day = 30
 
 x_train, y_train = [], []
@@ -33,7 +33,7 @@ for x in range(prediction_days, len(scaled_data)-future_day):
     x_train.append(scaled_data[x-prediction_days:x, 0])
     y_train.append(scaled_data[x+future_day, 0])
 
-x_train , y_train = np.array(x_train), np.array(y_train)
+x_train, y_train = np.array(x_train), np.array(y_train)
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
 
