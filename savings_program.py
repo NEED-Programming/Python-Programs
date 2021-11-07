@@ -1,19 +1,9 @@
-'''Program that calculates savings and interest'''
+principle = int(input("Enter principle amount: "))
+monthly = int(input("Enter monthly deposit amount: "))
+end_month = principle + monhtly
+rate = int(input("Enter interest rate: "))
+time = int(input("Enter time(years): "))
 
-initial_savings = 5000
-interest_rate = 0.03
+ci= principle * pow((1 + rate / 100), time) - principle
 
-print('Initial savings of ${}'.format(initial_savings))
-print('at {:.0f}% yearly interest.\n'.format(interest_rate*100))
-
-years = int(input('Enter years: '))
-print()
-
-savings = initial_savings
-i = 1  # Loop variable
-while i <= years:  # Loop condition
-    print(' Savings at beginning of year {}: ${:.2f}'.format(i, savings))
-    savings = savings + (savings*interest_rate)
-    i = i + 1  # Increment loop variable
-
-print('\n')
+print("Compound interest is ",ci)

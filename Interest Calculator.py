@@ -3,6 +3,9 @@ import math
 base = float(input('Enter initial savings: '))
 print()
 
+monthly = float(input('Enter monthly savings: '))
+print()
+
 rate = float(input('Enter annual interest % rate: '))
 print()
 
