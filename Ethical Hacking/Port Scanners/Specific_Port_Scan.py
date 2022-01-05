@@ -4,7 +4,7 @@ import pyfiglet
 import datetime
 from datetime import *
 
-ascii_banner = pyfiglet.figlet_format("PORT SCANNER")
+ascii_banner = pyfiglet.figlet_format("NEED PORT SCANNER")
 print(ascii_banner)
 print("-" * 50)
 print("Scanning Target: ")
@@ -13,10 +13,9 @@ print("-" * 50)
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-target = input('What you want to scan?: ')
+target = input('What  you want to scan?: ')
 
-# getting the ip address using gethostbyname
-# function
+# getting the ip address using gethostbyname function
 t_IP = socket.gethostbyname(target)
 print("Starting scan on host: ", t_IP)
 
